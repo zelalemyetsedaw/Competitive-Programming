@@ -1,19 +1,24 @@
 class Solution {
 public:
-    int maxCoins(vector<int>& piles) {
-        sort(piles.begin(),piles.end());
-        int sum=0;
-        int n= piles.size();
-        int i=n-2;
-        int j=0;
-        while(j<n/3)
+    int minPairSum(vector<int>& nums) {
+        int n = nums.size();
+        int left = 0;
+        int right = n-1;
+        sort(nums.begin(),nums.end());
+        int prev = 0;
+        int sum = 0;
+        while(left<right)
         {
-            sum += piles[i];
-            i-=2;
-            j++;
+             sum = nums[left] + nums[right];
+            if(sum>prev)
+            {
+                prev = sum;
+            }
+            left++;
+            right--;
+            
         }
-        return sum;
-       
+        return prev;
         
     }
 };

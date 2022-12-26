@@ -1,8 +1,8 @@
 # Enter your code here. Read input from STDIN. Print output to STDOUT
 
-en = int(input())
+numOfEnglish = int(input())
 english = set(input().split())
-ef = int(input())
+numOfFrench = int(input())
 french = set(input().split())
 
 

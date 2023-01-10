@@ -9,7 +9,9 @@ class Solution:
             for i in range(len(d)):
                 counts[".".join(d[i:])] += count
                 
-        return [f"{count} {domain}" for domain,count in counts.items()]
+        #return [f"{count} {domain}" for domain,count in counts.items()]
+        output = []
+        for domain,count in counts.items():
+            output.append(f"{count} {domain}")
         
-        
-        
+        return output

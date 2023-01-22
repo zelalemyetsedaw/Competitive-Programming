@@ -1,11 +1,11 @@
 class Solution:
     def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
-        r_len, c_len = len(matrix),len(matrix[0])
         flag = True
-        for r in range (1, r_len):
-            for c in range (1, c_len):
-                if matrix[r][c]!=matrix[r-1][c-1]:
+        for i in range(1,len(matrix)):
+            for j in range(1,len(matrix[i])):
+                if matrix[i][j] != matrix[i-1][j-1]:
                     flag = False
                     break
-        
+            if flag == False:
+                break
         return flag

@@ -1,8 +1,7 @@
 
 class Solution:
     def isUgly(self, n: int) -> bool:
-        if n == 1 and n==2:
-            return True
+        
         while n>0:
             if n==1:
                 return True

@@ -4,21 +4,15 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        maxlength = 0
-        end = 0
-        window = []
-        wlength = 0
-        
-        while end<len(s):
-            window.append(s[end])
-            wlength += 1
-            while len(window) != len(set(window)):
-                window.pop(0)
-                wlength -= 1
-                
-            maxlength = max(maxlength,wlength)
-            end += 1
-        return maxlength
+        seen = {}
+        start = 0
+        max_len = 0
+        for end in range(len(s)):
+            if s[end] in seen and seen[s[end]] >= start:
+                start = seen[s[end]] + 1
+            seen[s[end]] = end
+            max_len = max(max_len, end - start + 1)
+        return max_len
             
             
         

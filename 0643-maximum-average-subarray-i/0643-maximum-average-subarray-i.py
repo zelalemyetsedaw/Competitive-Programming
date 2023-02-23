@@ -1,21 +1,16 @@
 class Solution(object):
     def findMaxAverage(self, nums, k):
-       
+        start = 0
+        end = k
+        wsum = 0.0
         
-        start,end = 0,0
-        maxsum = -float("inf")
-        cursum = 0.0
-        curavg = 0
-        while(end<len(nums)):
-            cursum += nums[end]
-            if(end-start+1==k):
-                curavg = cursum / k
-                maxsum = max(maxsum,curavg)
-                cursum -= nums[start]
-                start += 1
-            
+        for i in range(k):
+            wsum += nums[i]
+        maxavg = wsum/k
+        while end<len(nums):
+            wsum = wsum + nums[end] - nums[start]
+            maxavg = max(wsum/k,maxavg)
+            start += 1
             end += 1
-                
-        return maxsum
-                
-        
+            
+        return maxavg

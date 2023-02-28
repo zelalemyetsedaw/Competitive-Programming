@@ -1,12 +1,20 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        maxlen, largestCount = 0, 0
-        arr = collections.Counter()
-        for idx in range(len(s)):
-            arr[s[idx]] += 1
-            largestCount = max(largestCount, arr[s[idx]])
-            if maxlen - largestCount >= k:
-                arr[s[idx - maxlen]] -= 1
-            else:
-                maxlen += 1
-        return maxlen
+        left = 0
+        right = 0
+        array = defaultdict(int)
+        maxlength = 0
+        for right in range(len(s)):
+            array[s[right]] += 1
+            
+            while right-left+1 - max(array.values()) > k:
+                array[s[left]] -= 1
+                left += 1
+            maxlength = max(maxlength,right-left+1)
+            
+        return maxlength
+                
+                
+            
+        
+        

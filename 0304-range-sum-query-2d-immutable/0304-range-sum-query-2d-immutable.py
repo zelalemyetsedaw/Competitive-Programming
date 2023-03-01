@@ -3,6 +3,7 @@ class NumMatrix:
     def __init__(self, matrix: List[List[int]]):
         rows,cols = len(matrix),len(matrix[0])
         self.prefix = [[0] * (cols + 1) for _ in range(rows + 1)]
+        print(self.prefix)
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 self.prefix[i+1][j+1] += self.prefix[i][j+1] + self.prefix[i+1][j] - self.prefix[i][j] + matrix[i][j]

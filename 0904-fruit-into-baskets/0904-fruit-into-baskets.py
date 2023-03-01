@@ -13,7 +13,7 @@ class Solution:
                     counts2.pop(fruits[left])
                 left += 1
             count = max(count,right-left+1)
-            right += 1
+            
             
         return count
         

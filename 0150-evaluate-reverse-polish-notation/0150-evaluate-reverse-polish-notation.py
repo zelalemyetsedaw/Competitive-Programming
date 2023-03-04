@@ -13,7 +13,7 @@ class Solution:
                     stack.append(num2 - num1)
                 elif(item == "/"):
                     stack.append(int(float(num2)/num1) )
-                    
+                # when double division in applied in negative numbers it give out floor of them    
                 
             else:
                 stack.append(int(item))

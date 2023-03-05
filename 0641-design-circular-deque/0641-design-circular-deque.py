@@ -3,63 +3,68 @@ class MyCircularDeque:
     def __init__(self, k: int):
         self.dequeue = [] * k
         self.k = k
+        self.length = 0
         
 
     def insertFront(self, value: int) -> bool:
-        if self.k == len(self.dequeue):
+        if self.k == self.length:
             return False
         else:
             self.dequeue.insert(0,value)
+            self.length += 1
             return True
         
 
     def insertLast(self, value: int) -> bool:
-        if self.k == len(self.dequeue):
+        if self.k == self.length:
             return False
         else:
             self.dequeue.append(value)
+            self.length += 1
             return True
         
 
     def deleteFront(self) -> bool:
-        if len(self.dequeue) == 0:
+        if self.length == 0:
             return False
         else:
             self.dequeue.pop(0)
+            self.length -= 1
             return True
         
 
     def deleteLast(self) -> bool:
-        if len(self.dequeue) == 0:
+        if self.length == 0:
             return False
         else:
             self.dequeue.pop()
+            self.length -= 1
             return True
         
 
     def getFront(self) -> int:
-        if len(self.dequeue) == 0:
+        if self.length == 0:
             return -1
         else:
             return self.dequeue[0]
         
 
     def getRear(self) -> int:
-        if len(self.dequeue) == 0:
+        if self.length == 0:
             return -1
         else:
             return self.dequeue[-1]
         
 
     def isEmpty(self) -> bool:
-        if len(self.dequeue) == 0:
+        if self.length == 0:
             return True
         else:
             return False
         
 
     def isFull(self) -> bool:
-        if len(self.dequeue) == self.k:
+        if self.length == self.k:
             return True
         else:
             return False

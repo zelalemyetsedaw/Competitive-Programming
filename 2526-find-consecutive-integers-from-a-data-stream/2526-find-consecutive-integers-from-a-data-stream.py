@@ -4,20 +4,19 @@ class DataStream:
         self.deque = collections.deque()
         self.value = value
         self.k = k
-        self.d = defaultdict(int)
+        self.count = 0
         
 
     def consec(self, num: int) -> bool:
         self.deque.append(num)
         if self.value == num:
-            self.d[num] += 1
+            self.count += 1
         while len(self.deque) > self.k:
             x = self.deque.popleft()
-            self.d[x] -= 1
-            if self.d[x] == 0:
-                self.d.pop(x)
+            if x == self.value:
+                self.count -= 1
         
-        return self.k == self.d[num]
+        return self.k == self.count
                 
         
 

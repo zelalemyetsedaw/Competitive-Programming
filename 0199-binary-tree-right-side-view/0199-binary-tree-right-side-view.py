@@ -10,18 +10,19 @@ class Solution:
         d = defaultdict(list)
         level = 0
         
-        def preorder(root,level,d):
+        def preorder(root,level):
             
             if root == None:
                 level -= 1
                 return
             
             d[level].append(root.val)
-            preorder(root.left,level+1,d)
+            preorder(root.left,level+1)
             
-            preorder(root.right,level+1,d)
+            preorder(root.right,level+1)
          
-        preorder(root,level,d)
+        preorder(root,level)
+        
         answer = []
         for item in d.values():
             answer.append(item[-1])

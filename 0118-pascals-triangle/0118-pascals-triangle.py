@@ -1,9 +1,21 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         
-        pascal = [[1]*(i+1) for i in range(numRows)]
-        for i in range(numRows):
-            for j in range(1,i):
-                pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j]
-        return pascal
+        ans = []
+        def recursion(num):
+            if num == 0:
+                return [1]
+            array = recursion(num-1)
+            
+            ans.append(array)
+            final = [1]
+            for i in range(1,len(array)):
+                final.append(array[i]+array[i-1])
+                
+            final.append(1)
+            return final
+        
+        recursion(numRows)
+        return ans
+            
         

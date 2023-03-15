@@ -1,21 +1,18 @@
 class Solution:
     def PredictTheWinner(self, nums: List[int]) -> bool:
-        memo = {}
-        def helper(_sum, nums, start, end):
+        def getscore(left, right, turn):
+            if left == right:
+                return nums[left] * turn
             
-            if (start, end) in memo:
-                return memo[(start, end)]
+            getleft = nums[left]*turn + getscore(left+1, right, -turn)
+            getright = nums[right]*turn + getscore(left, right-1, -turn)
             
-            if start == end:
-                memo[(start, end)] = nums[start]
-                return nums[start]
+            if turn == 1:
+                return max(getleft, getright)
+            elif turn == -1:
+                return min(getleft, getright)
             
-            score1 = _sum - helper(_sum - nums[start], nums, start+1, end) 
-            score2 = _sum - helper(_sum - nums[end], nums, start, end-1)
-            
-            res = max(score1, score2)
-            memo[(start, end)] = res
-            
-            return res
-        
-        return helper(sum(nums), nums, 0, len(nums)-1) * 2 >= sum(nums)
+        if getscore(0, len(nums)-1, 1) >= 0:
+            return True
+        else:
+            return False

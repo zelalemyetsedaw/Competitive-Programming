@@ -1,5 +1,6 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
+        
         left = 0
         right = len(nums)-1
         while right>=left:
@@ -14,4 +15,4 @@ class Solution:
                 
         return left
             
-            
+                

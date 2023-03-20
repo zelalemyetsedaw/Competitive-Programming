@@ -10,8 +10,8 @@ class Solution:
         if k<=half:
             return self.kthGrammar(n-1,k)
         else:
-            res=self.kthGrammar(n-1,k-half)
-            if res==0:
+            result=self.kthGrammar(n-1,k-half)
+            if result==0:
                 return 1
             else:
                 return 0

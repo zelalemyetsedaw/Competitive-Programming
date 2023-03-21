@@ -11,7 +11,7 @@ class Solution:
         def helper(root,cur):
             if root == None:
                 return
-            if root.left == None and root.right == None:
+            elif root.left == None and root.right == None:
                 cur += str(root.val)
                 ans.append(cur)
             

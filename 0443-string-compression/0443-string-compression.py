@@ -12,13 +12,10 @@ class Solution:
             else:
                 if count == 1:
                     chars[left] = chars[right-1]
-                    count = 1
                 elif count > 1 and count < 10:
                     chars[left] = chars[right-1]
-                    left = left+1
-                    
+                    left += 1
                     chars[left] = str(count)
-                    count = 1
                 else:
                     chars[left] = chars[right-1]
                     count = str(count)
@@ -27,7 +24,7 @@ class Solution:
                         chars[left] = count[i]
                         
                         
-                    count = 1
+                count = 1
                 left += 1
             right += 1
                 

@@ -3,7 +3,7 @@ class Solution:
         
         def combination(index,arr,temp,n,answer):
             if index == n :
-                if len(temp)>=2 and (not answer or  tuple(temp) not in answer):
+                if len(temp)>=2 :
                     answer.add(tuple(temp.copy()))
                 return answer
 

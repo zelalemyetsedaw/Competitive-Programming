@@ -19,14 +19,9 @@ class Solution:
                 summ += node.val
                 if node.left:
                     queue.append(node.left)
-                    
-                    
                 if node.right:
                     queue.append(node.right)
-                    
-            
             averages.append(summ/l)
                
-                    
                     
         return averages

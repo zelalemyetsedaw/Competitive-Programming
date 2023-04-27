@@ -13,7 +13,7 @@ class Solution:
         while queue:
             l = len(queue)
             
-            summ,count = 0,0
+            summ = 0
             for i in range(l):
                 node = queue.popleft()
                 summ += node.val

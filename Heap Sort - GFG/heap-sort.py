@@ -30,9 +30,7 @@ class Solution:
         self.buildHeap(arr,n)
         
         for i in range(n):
-            temp = arr[0]
-            arr[0] = arr[n-i-1]
-            arr[n-i-1] = temp
+            arr[0],arr[n-i-1] = arr[n-i-1],arr[0]
             self.heapify(arr,(n-i-1),0)
             
             

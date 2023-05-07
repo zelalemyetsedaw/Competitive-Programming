@@ -7,7 +7,7 @@ class Solution:
         for item in words:
             d[item] += 1
             
-        for i,key in enumerate(d):
+        for key in d:
             heappush(heap,(-d[key],key))
             
         temp = nsmallest(k,heap)

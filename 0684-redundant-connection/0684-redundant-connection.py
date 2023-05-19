@@ -32,11 +32,6 @@ class UnionFind:
             else:
                 self.parent[rootY] = rootX
                 self.rank[rootX] += 1
-        
-                
-
-    def connected(self, x, y):
-        return self.parent[x] == self.parent[y]
     def check(self,x,y):
         if self.find(x) == self.find(y):
             return True

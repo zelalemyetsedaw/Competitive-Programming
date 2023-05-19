@@ -20,14 +20,14 @@ class UnionFind:
     def union(self, x, y):
         rootX = self.find(x)
         rootY = self.find(y)
-        if rootX != rootY:
-            if self.rank[rootX] > self.rank[rootY]:
-                self.parent[rootY] = rootX
-            elif self.rank[rootX] < self.rank[rootY]:
-                self.parent[rootX] = rootY
-            else:
-                self.parent[rootY] = rootX
-                self.rank[rootX] += 1
+        
+        if self.rank[rootX] > self.rank[rootY]:
+            self.parent[rootY] = rootX
+        elif self.rank[rootX] < self.rank[rootY]:
+            self.parent[rootX] = rootY
+        else:
+            self.parent[rootY] = rootX
+            self.rank[rootX] += 1
 
 class Solution:
     def removeStones(self, stones: List[List[int]]) -> int:

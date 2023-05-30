@@ -2,7 +2,7 @@ class Solution:
     def lemonadeChange(self, bills: List[int]) -> bool:
         store5 = []
         store10 = []
-        store20 = []
+        
         
         for i in bills:
             if i == 5:
@@ -17,7 +17,7 @@ class Solution:
                 if store5 and store10:
                     store5.pop()
                     store10.pop()
-                    store20.append(20)
+                    
                 elif len(store5) >= 3:
                     store5.pop()
                     store5.pop()

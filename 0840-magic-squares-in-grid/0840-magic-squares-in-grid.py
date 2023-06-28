@@ -1,29 +1,28 @@
 class Solution:
     def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
-        cnt = 0
-        # Construct the 3x3 square
-        for i in range(len(grid)-2):
-            for j in range(len(grid)-2):
-                temp_grid = [grid[i+k][j:j+3] for k in range(3)]
-                if self.isMagicSquare(temp_grid):
-                    cnt += 1
         
-        return cnt
-        
-    
-    def isMagicSquare(self, grid):
-        '''
-        Check whether the given grid is a magic square
-        '''
-        # Check the elements
-        flat = [num for row in grid for num in row]
-        if sorted(flat) != [1, 2, 3, 4, 5, 6, 7, 8, 9]:
-            return False
-        
-        # Check the row, column and diagnal sums
-        row_sums = [sum(row) for row in grid]
-        col_sums = [sum([row[i] for row in grid]) for i in range(3)]
-        diag_sums = [sum([grid[i][i] for i in range(3)]), (grid[0][2] + grid[1][1] + grid[2][0])]
-        row_sums.extend(col_sums)
-        row_sums.extend(diag_sums)
-        return len(set(row_sums)) == 1
+        n = len(grid)
+        m = len(grid[0])
+        count = 0
+        for i in range(1,n-1):
+            for j in range(1,m-1):
+                
+                array1 = [grid[i-1][j-1] , grid[i-1][j] , grid[i-1][j+1] , grid[i][j-1] , grid[i][j] , grid[i][j+1], grid[i+1][j-1] , grid[i+1][j] , grid[i+1][j+1]]
+                array1.sort()
+                
+                if  array1!= [1,2,3,4,5,6,7,8,9]:
+                    continue
+                
+                diagonal1 =  grid[i][j] + grid[i-1][j-1] + grid[i+1][j+1]
+                diagonal2 = grid[i][j] + grid[i-1][j+1] + grid[i+1][j-1]
+                row1 = grid[i-1][j-1] + grid[i-1][j] + grid[i-1][j+1]
+                row2 = grid[i][j-1] + grid[i][j] + grid[i][j+1]
+                row3 = grid[i+1][j-1] + grid[i+1][j] + grid[i+1][j+1]
+                col1 = grid[i-1][j-1] + grid[i][j-1] + grid[i+1][j-1]
+                col2 = grid[i-1][j] + grid[i][j] + grid[i+1][j]
+                col3 = grid[i-1][j+1] + grid[i][j+1] + grid[i+1][j+1]
+                if diagonal1 == diagonal2 == row1 == row2 == row3 == col1 == col2 == col3:
+                    count += 1
+                    
+        return count 
+                

@@ -1,21 +1,30 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         
-        memo = {}
+    
+        dp = [[0] * n for _ in range(m)]
+
+        # Base case: there is only one way to reach the bottom-right cell
+        dp[m - 1][n - 1] = 1
+
+        # Fill the last row (from right to left)
+        for c in range(n - 2, -1, -1):
+            dp[m - 1][c] = dp[m - 1][c + 1]
+
+        # Fill the last column (from bottom to top)
+        for r in range(m - 2, -1, -1):
+            dp[r][n - 1] = dp[r + 1][n - 1]
+
+        # Fill the rest of the cells using the recurrence relation
+        for r in range(m - 2, -1, -1):
+            for c in range(n - 2, -1, -1):
+                dp[r][c] = dp[r + 1][c] + dp[r][c + 1]
+
         
-        def backtrack(r,c):
-            if r == m-1 and c== n-1:
-                return 1
-            if r < 0 or c < 0 or r==m or c==n:
-                return 0
-            
-            if (r,c) in memo:
-                return memo[(r,c)]
-            
-            memo[(r,c)] = backtrack(r,c+1) + backtrack(r+1,c)
-            
-            return memo[(r,c)]
-        
-        return backtrack(0,0)
+
+
+    
+        return dp[0][0]  
+
         
     

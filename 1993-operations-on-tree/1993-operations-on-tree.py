@@ -35,7 +35,7 @@ class LockingTree:
                 self.locked[num] = user 
                 for node in descendant: self.locked.pop(node) 
                 return True 
-        return False # locked ancestor 
+        return False 
         
 
 

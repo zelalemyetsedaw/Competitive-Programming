@@ -5,20 +5,13 @@ class Solution:
         for char in words[0]:
             d[char] += 1
         
-        
         for item in words:
             temp = defaultdict(int)
             for i in item:
                 temp[i]+=1
-            keytodelete = []
             for key in d.keys():
-                if key in temp:
-                    d[key] = min(d[key],temp[key])
-                    continue
-                else:
-                    keytodelete.append(key)
-            for j in keytodelete:
-                d.pop(j)
+                d[key] = min(d[key],temp[key])
+                 
         
         answer = []
         for key in d:

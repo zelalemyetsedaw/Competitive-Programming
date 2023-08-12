@@ -1,13 +1,26 @@
 class Solution:
-    def pancakeSort(self, A: List[int]) -> List[int]:
-        result, n = [], len(A)
-        for i in range(n,0,-1):
-            pl = A.index(i)
-            if pl == i-1: continue
-            if pl != 0:
-                result.append(pl+1)
-                A[:pl+1] = A[:pl+1][::-1]
-            result.append(i)
-            A[:i] = A[:i][::-1]
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        
+        maxNumber = arr[0]
+        
+        i = 0
+        j = len(arr)-1
+        answer = []
+        while j > 0:
+            maxx = 0
             
-        return result
+            for k in range(j+1):
+                if arr[k] > arr[maxx]:
+                    maxx = k
+            
+            # if maxx != j:
+            arr[:maxx+1] = reversed(arr[:maxx+1])
+            answer.append(maxx+1)
+            arr[:j+1] = reversed(arr[:j+1])
+            answer.append(j+1)
+            j -= 1
+            
+        return answer
+                    
+                
+            

@@ -13,11 +13,11 @@ class Solution:
                 if arr[k] > arr[maxx]:
                     maxx = k
             
-            # if maxx != j:
-            arr[:maxx+1] = reversed(arr[:maxx+1])
-            answer.append(maxx+1)
-            arr[:j+1] = reversed(arr[:j+1])
-            answer.append(j+1)
+            if maxx != j:
+                arr[:maxx+1] = reversed(arr[:maxx+1])
+                answer.append(maxx+1)
+                arr[:j+1] = reversed(arr[:j+1])
+                answer.append(j+1)
             j -= 1
             
         return answer

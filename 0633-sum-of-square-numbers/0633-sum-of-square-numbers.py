@@ -1,14 +1,12 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        left = 0
-        right = int(sqrt(c))
-        flag = False
-        while left<=right:
-            if left**2 + right**2 == c:
-                flag = True
-                break
-            elif left**2 + right**2 > c:
-                right -=1
-            else:
-                left += 1
-        return flag
+        
+        i = 1
+        sets = set([0])
+        while i**2 <= 2**31 -1:
+            sets.add(i**2)
+            i += 1
+        for i in sets:
+            if (c - i) in sets:
+                return True
+        return False

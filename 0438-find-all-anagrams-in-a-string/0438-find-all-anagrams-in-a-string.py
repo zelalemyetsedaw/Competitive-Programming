@@ -1,14 +1,25 @@
-class Solution(object):
-    def findAnagrams(self, s, p):
-        result = []
-        target_counts = collections.Counter(p)
-        window_counts = collections.Counter(s[:len(p) - 1])
-        for i in range(len(p) - 1, len(s)):
-            window_counts[s[i]] += 1
-            if window_counts == target_counts:
-                 result.append(i - len(p) + 1)
-            window_counts[s[i - len(p) + 1]] -= 1
-            if window_counts[s[i - len(p) + 1]] == 0:
-                   del window_counts[s[i - len(p) + 1]]
-        return result          
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
         
+        dict_p = defaultdict(int)
+        dict_s = defaultdict(int)
+        lengthp = len(p)
+        
+        for i in p:
+            dict_p[i] += 1
+        
+        left = 0
+        answer = []
+        for right in range(len(s)):
+            dict_s[s[right]] += 1
+            if right - left == lengthp - 1:
+                if dict_s == dict_p:
+                    answer.append(left)
+                dict_s[s[left]] -= 1
+                if dict_s[s[left]] == 0:
+                    dict_s.pop(s[left])
+                left += 1
+        return answer
+                
+            
+            

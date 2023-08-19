@@ -1,18 +1,19 @@
 class Solution:
     def maxSumRangeQuery(self, nums: List[int], requests: List[List[int]]) -> int:
-        
         n = len(nums)
-        array = [0]*(n + 1)
-        for a, b in requests:
-            array[a] += 1
-            array[b + 1] -= 1
+        temp = [0] * (n + 1)
+        for i,j in requests:
+            temp[i] += 1
+            temp[j+1] -= 1
+        for i in range(1,n + 1):
+            temp[i] += temp[i-1]
             
+        temp.sort(reverse=True)
+        nums.sort(reverse=True)
         
-        for i in range(1, n):
-            array[i] += array[i - 1]
-        
-        nums.sort()
-        array.pop()
-        array.sort()
-        
-        return sum(a*b for a, b in zip(nums, array)) % (10**9 + 7)
+        answer = 0
+        for i in range(n):
+            answer += temp[i] * nums[i]
+            
+        return answer% (10 ** 9 + 7)
+            

@@ -1,17 +1,16 @@
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-       
         
-        array = [0] * 1002
-        for num,fromm,to in trips:
-            array[fromm] += num
-            array[to ] -= num
+        temp = [0] * 1001
+        
+        for num,fromi,toi in trips:
+            temp[fromi] += num
+            temp[toi] -= num
+        for i in range(1,len(temp)):
+            temp[i] += temp[i-1]
             
-        for i in range(1002):
-            array[i] += array[i-1]
-            
-        for i in array:
-            if i>capacity:
+        for item in temp:
+            if item > capacity:
                 return False
         return True
             

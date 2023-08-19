@@ -1,18 +1,14 @@
-class NumArray(object):
+class NumArray:
 
-    def __init__(self, nums):
-        self.answer = nums
-        self.length = len(nums)
-        for i in range(1,self.length):
-            self.answer[i] += self.answer[i-1]
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+        for i in range(1,len(nums)):
+            nums[i] += nums[i-1]
 
-    def sumRange(self, left, right):
-        if left!=0:
-            return self.answer[right]-self.answer[left-1]
-        else:
-            return self.answer[right]
-            
-        
+    def sumRange(self, left: int, right: int) -> int:
+        if left == 0:
+            return self.nums[right]
+        return self.nums[right] - self.nums[left-1]
         
 
 

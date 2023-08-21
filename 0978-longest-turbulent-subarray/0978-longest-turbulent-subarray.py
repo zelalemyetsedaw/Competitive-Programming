@@ -2,7 +2,8 @@ class Solution:
     def maxTurbulenceSize(self, arr: List[int]) -> int:
         
         l,r = 0,1
-        res, prev = 1, ""
+        res=1
+        prev = ""
         
         while r < len(arr):
             if arr[r-1] > arr[r] and prev != ">":

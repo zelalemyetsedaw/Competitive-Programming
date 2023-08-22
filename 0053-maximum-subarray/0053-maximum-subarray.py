@@ -1,7 +1,7 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         
-        largestSum = nums[0]
+        largest = nums[0]
         
         cursum = 0
         
@@ -11,6 +11,6 @@ class Solution:
                 cursum = 0
             
             cursum += item
-            largestSum = max(largestSum,cursum)
+            largest = max(largest,cursum)
             
-        return largestSum
+        return largest

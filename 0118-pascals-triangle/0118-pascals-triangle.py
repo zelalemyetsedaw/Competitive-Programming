@@ -17,10 +17,11 @@ class Solution:
         
         for i in range(numRows-1):
             temp = [0] + answer[-1] + [0]
-            temp2 = []
+            
             for j in range(len(temp) - 1):
-                temp2.append(temp[j]+temp[j+1])
-            answer.append(temp2)
+                temp[j] = temp[j]+temp[j+1]
+            temp.pop()
+            answer.append(temp)
             
         return answer
 

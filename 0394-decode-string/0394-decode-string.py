@@ -1,39 +1,23 @@
 class Solution:
     def decodeString(self, s: str) -> str:
-        output = ""
-        numstack = []
-        stack = []
-        temp = ""
-        num = ""
-        for i in  range(len(s)):
-            if s[i].isdigit():
-                num += s[i]
-                if not s[i+1].isdigit():
-                    numstack.append(int(num))
-                    num = ""
-            elif s[i] == "]":
-                i = s[i]
-                while i != "[":
-                    temp = stack.pop() + temp
-                    i = stack[-1]
-                stack.pop()
-                temp = temp * int(numstack.pop())
-                
-                if not numstack:
-                    output = output + "".join(stack)  + temp
-                    stack = []
-                    temp = ""
-                else:
-                    stack.append(temp)
-                    temp = ""
-                    
-                
-                    
-            else:
-                stack.append(s[i])
         
+        def recursion(index,lists):
+            if index == len(s):
+                return lists
+            if s[index] == "]":
+                string = ""
+                number = ""
+                while lists and lists[-1] != "[":
+                    string = lists.pop() + string
+                lists.pop()
+                while  lists and lists[-1].isdigit():
+                    number = lists.pop() + number
                 
-                
-        return output + "".join(stack)
-                
+                string = int(number) * string
+                lists.append(string)
+            else:
+                lists.append(s[index])
             
+            return recursion(index+1,lists)
+            
+        return "".join(recursion(0,[]))

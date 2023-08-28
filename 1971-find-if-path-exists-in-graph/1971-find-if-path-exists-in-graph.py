@@ -6,19 +6,18 @@ class Solution:
             graph[i].append(j)
             graph[j].append(i)
         
-        visited = set()
-        flag = False
-        def dfs(source,destination,flag):
+        visited = set([source])
+        stack = [source]
+        
+        while stack:
+            source = stack.pop()
             if source == destination:
-                flag = True
-            visited.add(source)
+                return True
             
             for child in graph[source]:
                 if child not in visited:
-                    flag = dfs(child,destination,flag)
-            return flag
-            
-            
-            
+                    visited.add(child)
+                    stack.append(child)
+                    
+        return False
         
-        return dfs(source,destination,flag)

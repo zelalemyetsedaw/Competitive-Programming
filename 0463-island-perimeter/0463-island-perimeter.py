@@ -1,22 +1,30 @@
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        visit = set()
+        def inbound(row,col):
+            return 0 <= row <= len(grid)-1 and 0 <= col <= len(grid[0])-1
+        
+        directions = [(0,1),(1,0),(0,-1),(-1,0)]
+        visited = [[False] * len(grid[0]) for _ in range(len(grid))]
+        
         
         def dfs(row,col):
-            if row >= len(grid) or col >= len(grid[0]) or row < 0 or col < 0 or grid[row][col] == 0:
+            if not inbound(row,col) or grid[row][col] == 0  :
                 return 1
-            if (row,col) in visit:
+            if visited[row][col]:
                 return 0
+            visited[row][col] = True
+            count = 0
             
-            visit.add((row,col))
-            p = dfs(row+1,col)
-            p += dfs(row,col+1)
-            p += dfs(row-1,col)
-            p += dfs(row,col-1)
-            
-            return p
+            for rowchange,colchange in directions:
+                newrow = row + rowchange
+                newcol = col + colchange
+                count += dfs(newrow,newcol)
+                
+                
+            return count 
         
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == 1:
                     return dfs(i,j)
+                 

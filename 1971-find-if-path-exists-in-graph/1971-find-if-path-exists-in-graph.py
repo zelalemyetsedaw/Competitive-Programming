@@ -1,27 +1,24 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        if source == destination:
-            return True
+        
         graph = defaultdict(list)
+        for i,j in edges:
+            graph[i].append(j)
+            graph[j].append(i)
         
-        for item in edges:
-            graph[item[0]].append(item[1])
-            graph[item[1]].append(item[0])
+        visited = set()
+        flag = False
+        def dfs(source,destination,flag):
+            if source == destination:
+                flag = True
+            visited.add(source)
             
-        queue = deque([source])
-        visited = set([source])
-        
-        while queue:
-            x = queue.popleft()
-            
-            for child in graph[x]:
-                if child == destination:
-                    return True
+            for child in graph[source]:
                 if child not in visited:
-                    queue.append(child)
-                    visited.add(child)
-                    
-        return False
-                
-        
+                    flag = dfs(child,destination,flag)
+            return flag
             
+            
+            
+        
+        return dfs(source,destination,flag)

@@ -8,22 +8,21 @@ class Solution:
     def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
         
         averages = []
-        queue = [root]
+        queue = deque([root])
         
         while queue:
-            summ = 0
-            count = 0
-            nextlevel = []
+            levelcount = len(queue)
+            levelsum = 0
             
-            for node in queue:
-                summ += node.val
-                count += 1
+            for i in range(levelcount):
+                node = queue.popleft()
+                levelsum += node.val
                 
                 if node.left:
-                    nextlevel.append(node.left)
+                    queue.append(node.left)
                 if node.right:
-                    nextlevel.append(node.right)
-            averages.append(summ/count)
-            queue = nextlevel
+                    queue.append(node.right)
+                    
+            averages.append(levelsum/levelcount)
             
         return averages

@@ -1,35 +1,40 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        def inbound(r,c):
+            return 0 <= r < m and 0 <= c < n
         
-        freshset = set()
-        queue = deque([])
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if grid[r][c] == 1:
-                    freshset.add((r,c))
-                elif grid[r][c] == 2:
-                    queue.append((r,c))
-        count = 0            
-        while queue and freshset:
-            n = len(queue)
-            for i in range(n):
-                temp = queue.popleft()
-                r= temp[0]
-                c = temp[1]
-                if (r+1,c) in freshset:
-                    freshset.remove((r+1,c))
-                    queue.append((r+1,c))
-                if (r,c+1) in freshset:
-                    freshset.remove((r,c+1))
-                    queue.append((r,c+1))
-                if (r-1,c) in freshset:
-                    freshset.remove((r-1,c))
-                    queue.append((r-1,c))
-                if (r,c-1) in freshset:
-                    freshset.remove((r,c-1))
-                    queue.append((r,c-1))
-            count += 1
-        if freshset:
-            return -1
-        return count
+        
+        visited = set()
+        queue = deque()
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 2:
+                    queue.append((i,j))
+                    visited.add((i,j))
+        
+        second = 0
+        directions = [(0,1),(1,0),(0,-1),(-1,0)]
+        
+        while queue:
+            level = len(queue)
+            second += 1
+            
+            for i in range(level):
+                dx,dy = queue.popleft()
+                
+                for a,b in directions:
+                    newdx,newdy = dx+a,dy+b
+                    if inbound(newdx,newdy) and (newdx,newdy) not in visited and grid[newdx][newdy] != 0:
+                        queue.append((newdx,newdy))
+                        visited.add((newdx,newdy))
+                        grid[newdx][newdy] = 2
+                        
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    return -1
+        return second - 1 if second > 0 else 0
                     
+                

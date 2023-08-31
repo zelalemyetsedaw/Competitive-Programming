@@ -3,8 +3,8 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        left = 0
-        right = 0
+        
+        left,right = 0,0
         ans = []
         while left<m and right<n:
             if nums1[left]<nums2[right]:

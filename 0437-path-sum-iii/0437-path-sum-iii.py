@@ -6,29 +6,27 @@
 #         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        dicts = defaultdict(int)
-        dicts[0] = 1
-        summ = 0
-        count = 0
-        def findsum(root,targetsum,summ,count):
-            if root == None:
-                return count,summ
-            
-            summ += root.val
-            if summ-targetsum in dicts:
-                count += dicts[summ-targetsum]
-            
-            dicts[summ] += 1
-            count,summ = findsum(root.left,targetsum,summ,count)
-            count,summ = findsum(root.right,targetsum,summ,count)
-            dicts[summ] -= 1
-            summ -= root.val
-            
-            
-            
-            return count,summ
+        if not root:
+            return 0
         
-        count,summ =  findsum(root,targetSum,summ,count)
+        count = 0
+        leftsum = defaultdict(int)
+        leftsum[0] += 1
+        
+        stack = [(root,root.val,leftsum)]
+        while stack:
+            x,summ,leftsumm = stack.pop()
+            
+            
+            if summ - targetSum in leftsumm:
+                count += leftsumm[summ - targetSum]
+            leftsumm[summ] += 1
+            if x.right:
+                stack.append((x.right,summ + x.right.val,leftsumm.copy()))
+                
+            if x.left:
+                
+                stack.append((x.left,summ + x.left.val,leftsumm.copy()))
+            
+                
         return count
-            
-            

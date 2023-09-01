@@ -1,7 +1,6 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-       
-        answer = []
+        ans = []
         for i in range(n+1):
             count  = 0
         
@@ -9,9 +8,6 @@ class Solution:
                 count += i & 1;
                 i >>= 1;
                 
-            answer.append(count)
+            ans.append(count)
             
-        return answer
-        
-        
-     
+        return ans

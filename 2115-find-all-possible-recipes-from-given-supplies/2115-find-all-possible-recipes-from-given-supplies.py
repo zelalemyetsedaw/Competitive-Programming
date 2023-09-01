@@ -2,36 +2,24 @@ class Solution:
     def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
         
         graph = defaultdict(list)
-        incoming = defaultdict(int)
-        for i in recipes:
-            incoming[i] = 0
-        for i in supplies:
-            incoming[i] = 0
-        
+        indegree = defaultdict(int)
         for i in range(len(recipes)):
-            
-            incoming[recipes[i]] = len(ingredients[i])
-            
-        for j in range(len(ingredients)):
-            for i in ingredients[j]:
-                graph[i].append(recipes[j])
-            
-        todo = deque([])
-        for index in incoming:
-            if incoming[index] == 0:
-                todo.append(index)
+            for j in ingredients[i]:
+                graph[j].append(recipes[i])
+                indegree[recipes[i]] += 1
+                
+        queue = deque()
+        for i in supplies:
+            queue.append(i)
         
         answer = []
-        
-        while todo:
-            current = todo.popleft()
-            for child in graph[current]:
-                incoming[child] -= 1
-                
-                
-                if incoming[child] == 0:
+        while queue:
+            x = queue.popleft()
+            
+            for child in graph[x]:
+                indegree[child] -= 1
+                if indegree[child] == 0:
+                    queue.append(child)
                     answer.append(child)
-                    todo.append(child)
-                
+                    
         return answer
-        

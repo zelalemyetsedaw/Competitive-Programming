@@ -19,7 +19,7 @@ class Solution:
                 indegree[child] -= 1
                 if indegree[child] == 0:
                     queue.append(child)
-        if sum(indegree) > 0:
+        if len(answer) != numCourses:
             return []
         return answer
             

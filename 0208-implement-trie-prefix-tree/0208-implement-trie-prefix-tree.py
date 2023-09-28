@@ -19,25 +19,21 @@ class Trie:
                 
         
 
-    def search(self, word: str) -> bool:
+    def search(self, word: str, flag:bool = False) -> bool:
         current = self.root
         for char in word:
             index = ord(char) - 97
             if not current.children[index]:
                 return False
             current = current.children[index]
-        if current.is_end:
-            return True
+        if not flag:
+            if current.is_end:
+                return True
+        else: return True
         
 
     def startsWith(self, prefix: str) -> bool:
-        current = self.root
-        for char in prefix:
-            index = ord(char) - 97
-            if not current.children[index]:
-                return False
-            current = current.children[index]
-        return True
+        return self.search(prefix,True)
         
 
 

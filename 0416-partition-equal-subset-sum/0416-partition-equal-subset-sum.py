@@ -5,16 +5,20 @@ class Solution:
         if summ % 2 != 0:
             return False
         
-        memo = [[-1] * (summ//2 + 1) for i in range(len(nums) + 1)]
-        def recursion(summ,index):
-            if memo[index][summ] != -1:
-                return memo[index][summ]
-            if summ == 0:
-                return True
-            if index == 0 or summ < 0:
-                return False
-            
-            memo[index][summ] = recursion(summ,index - 1) or recursion(summ - nums[index - 1],index - 1)
-            return memo[index][summ]
+        dp = [[-1] * (summ//2 + 1) for i in range(len(nums) + 1)]
         
-        return recursion(summ//2,len(nums))
+        for i in range(len(nums) + 1):
+            for s in range((summ//2)+1):
+                if s == 0:
+                    dp[i][s] = True
+                elif i == 0:
+                    dp[i][s] = False
+                    
+                elif nums[i-1] > s:
+                    dp[i][s] = dp[i-1][s]
+                else:
+                    dp[i][s] = dp[i-1][s] or dp[i-1][s-nums[i-1]]
+                    
+        return dp[-1][-1]
+                
+        

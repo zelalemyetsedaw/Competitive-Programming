@@ -4,12 +4,12 @@ class Solution:
         stack = []
         
         for item in logs:
-            if item == "../" and stack:
-                stack.pop()
-            elif item == "./" or (item == "../" and not stack):
+            if (not stack and item == "../") or item == "./" :
                 continue
+            elif stack and item == "../":
+                stack.pop()
             else:
-                stack.append("x")
+                stack.append(item)
                 
         return len(stack)
                 

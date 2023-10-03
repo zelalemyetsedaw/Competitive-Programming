@@ -9,7 +9,7 @@ class Solution:
             d[s[right]] += 1
             maxlen = max(maxlen,d[s[right]])
             
-            while (right - left + 1) - maxlen > k:
+            if (right - left + 1) - maxlen > k:
                 d[s[left]] -= 1
                 left += 1
             answer = max(answer,right - left + 1)

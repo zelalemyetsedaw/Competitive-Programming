@@ -1,24 +1,38 @@
 class Solution:
     def containsCycle(self, grid: List[List[str]]) -> bool:
-        
-        def dfs(node, parent):
-            if node in visited: return True
-            visited.add(node)
-            nx,ny = node
-            childs = [(cx,cy) for cx,cy in [[nx+1,ny],[nx-1, ny],[nx,ny+1],[nx,ny-1]] 
-                      if 0 <= cx < m and 0 <= cy < n 
-                      and grid[cx][cy] == grid[nx][ny] and (cx,cy) != parent]
-            for x in childs:
-                if dfs(x, node): return True 
-            return False  
-    
-        m, n = len(grid), len(grid[0])
+        m,n = len(grid),len(grid[0])
+        def inbound(r,c):
+            return 0 <= r <= m-1 and 0 <= c <= n-1
         visited = set()
+        direction = [(0,1),(1,0),(-1,0),(0,-1)]
+        def dfs(r,c,parent):
+            
+            startchar = grid[r][c]
+            visited.add((r,c))
+            
+            for x,y in direction:
+                newx,newy = r + x , y + c
+                if inbound(newx,newy) and grid[newx][newy] == startchar and (newx,newy) != parent:
+                    
+                    if (newx,newy) in visited:
+                        return True
+                    if dfs(newx,newy,(r,c)):
+                        return True
+                
+            return False
+            
+            
+            
+            
+            
         for i in range(m):
             for j in range(n):
-                if (i,j) in visited: continue 
-                if dfs((i,j), None): return True
-        return False 
+                if (i,j) not in visited:
+                    if dfs(i,j,(-1,-1)):
+                        return True
+                    
+        return False
+            
             
             
         

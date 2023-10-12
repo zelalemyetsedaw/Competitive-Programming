@@ -6,7 +6,7 @@ class TimeMap:
         
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        self.d[key].append((timestamp,value))
+        self.d[key].append([timestamp,value])
         
 
     def get(self, key: str, timestamp: int) -> str:

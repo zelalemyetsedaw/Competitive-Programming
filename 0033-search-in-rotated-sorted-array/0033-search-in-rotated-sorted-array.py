@@ -7,10 +7,10 @@ class Solution:
         while left <= right:
             mid = left + (right-left)//2
             
-            if (nums[mid] >= nums[left] and target >= nums[left]) or (nums[mid] < nums[left] and target < nums[left]):
+            if (nums[mid] >= nums[0] and target >= nums[0]) or (nums[mid] < nums[0] and target < nums[0]):
                 midelement = nums[mid]
             else:
-                if target < nums[left]:
+                if target < nums[0]:
                     midelement = -float("inf")
                 else:
                     midelement = float("inf")
